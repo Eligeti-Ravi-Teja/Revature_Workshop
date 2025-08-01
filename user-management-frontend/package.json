@@ -1,0 +1,22 @@
+{
+  "name": "user-management-frontend",
+  "version": "1.0.0",
+  "description": "Simple HTML/CSS/JavaScript frontend for User Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "user-management",
+    "frontend",
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "User Management System",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  }
+} 

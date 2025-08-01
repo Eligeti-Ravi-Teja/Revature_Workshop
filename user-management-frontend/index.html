@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Get Started Page -->
+        <div id="getStartedPage" class="get-started-page">
+            <div class="get-started-content">
+                <div class="get-started-description">
+                    <h1 class="welcome-title">Welcome to Your User Management System</h1>
+                    <p class="welcome-subtitle">User Management System<br>Simple CRUD operations for user management</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">👥</span>
+                            <h3>User Management</h3>
+                            <p>Create, view, edit, and delete users with ease</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔍</span>
+                            <h3>Search & Filter</h3>
+                            <p>Find users by email, name, or role with advanced filtering</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <h3>Statistics</h3>
+                            <p>Real-time statistics and user analytics</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📱</span>
+                            <h3>Responsive Design</h3>
+                            <p>Works perfectly on desktop, tablet, and mobile</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="getStartedBtn" class="btn btn-primary get-started-btn">
+                    Get Started
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Application (Hidden initially) -->
+        <div id="mainApp" class="main-app" style="display: none;">
+            <header>
+                <div class="header-content">
+                    <div class="header-text">
+                        <h1>User Management System</h1>
+                        <p>Simple CRUD operations for user management</p>
+                    </div>
+                    <div class="header-actions">
+                        <button id="themeToggle" class="btn btn-secondary theme-toggle">
+                            🌙
+                        </button>
+                        <button id="backToStartBtn" class="btn btn-secondary back-btn">
+                            ← Back to Start
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main-layout">
+                <!-- Left Sidebar with Tabs -->
+                <aside class="sidebar">
+                    <nav class="tab-navigation">
+                        <button class="tab-button active" data-tab="create">
+                            <span class="tab-icon">➕</span>
+                            Create User
+                        </button>
+                        <button class="tab-button" data-tab="search">
+                            <span class="tab-icon">🔍</span>
+                            Search & Filter
+                        </button>
+                        <button class="tab-button" data-tab="users">
+                            <span class="tab-icon">👥</span>
+                            User List
+                        </button>
+                        <button class="tab-button" data-tab="stats">
+                            <span class="tab-icon">📊</span>
+                            Statistics
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Main Content Area -->
+                <main class="main-content">
+                    <!-- Create User Tab -->
+                    <section id="create" class="tab-content active">
+                        <div class="card">
+                            <h2>Create New User</h2>
+                            <form id="createUserForm">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required 
+                                           placeholder="Enter email address">
+                                    <small class="form-help">Email must contain @ and .com</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required
+                                           placeholder="Enter first name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required
+                                           placeholder="Enter last name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phoneNumber">Phone Number</label>
+                                    <input type="tel" id="phoneNumber" name="phoneNumber" 
+                                           maxlength="10" placeholder="Enter 10-digit phone number">
+                                    <small class="form-help">Phone number must be exactly 10 digits</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <textarea id="address" name="address" rows="3" 
+                                              placeholder="Enter address"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <select id="role" name="role">
+                                        <option value="">Select Role</option>
+                                        <option value="USER">User</option>
+                                        <option value="ADMIN">Admin</option>
+                                        <option value="MANAGER">Manager</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Create User</button>
+                            </form>
+                        </div>
+                    </section>
+
+                    <!-- Search and Filter Tab -->
+                    <section id="search" class="tab-content">
+                        <div class="card">
+                            <h2>Search & Filter Users</h2>
+                            <div class="search-controls">
+                                <div class="search-section">
+                                    <h3>Quick Search</h3>
+                                    <div class="form-group">
+                                        <label for="quickSearch">Search All Fields</label>
+                                        <input type="text" id="quickSearch" placeholder="Search by name, email, or role...">
+                                        <button onclick="quickSearch()" class="btn btn-secondary">Search</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="search-section">
+                                    <h3>Advanced Search</h3>
+                                    <div class="form-group">
+                                        <label for="searchEmail">Search by Email</label>
+                                        <input type="email" id="searchEmail" placeholder="Enter email">
+                                        <button onclick="searchByEmail()" class="btn btn-secondary">Search</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="searchFirstName">Search by First Name</label>
+                                        <input type="text" id="searchFirstName" placeholder="Enter first name">
+                                        <button onclick="searchByFirstName()" class="btn btn-secondary">Search</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="searchLastName">Search by Last Name</label>
+                                        <input type="text" id="searchLastName" placeholder="Enter last name">
+                                        <button onclick="searchByLastName()" class="btn btn-secondary">Search</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="search-section">
+                                    <h3>Filter Options</h3>
+                                    <div class="form-group">
+                                        <label for="filterRole">Filter by Role</label>
+                                        <select id="filterRole">
+                                            <option value="">All Roles</option>
+                                            <option value="USER">User</option>
+                                            <option value="ADMIN">Admin</option>
+                                            <option value="MANAGER">Manager</option>
+                                        </select>
+                                        <button onclick="filterByRole()" class="btn btn-secondary">Filter</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="filterStatus">Filter by Status</label>
+                                        <select id="filterStatus">
+                                            <option value="">All Users</option>
+                                            <option value="active">Active Users</option>
+                                            <option value="inactive">Inactive Users</option>
+                                        </select>
+                                        <button onclick="filterByStatus()" class="btn btn-secondary">Filter</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="search-actions">
+                                    <button onclick="getAllUsers()" class="btn btn-primary">Show All Users</button>
+                                    <button onclick="clearSearch()" class="btn btn-secondary">Clear Filters</button>
+                                    <button onclick="exportUsers()" class="btn btn-success">Export Users</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- User List Tab -->
+                    <section id="users" class="tab-content">
+                        <div class="card">
+                            <h2>User List</h2>
+                            <div class="bulk-actions">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                                    <span class="checkmark"></span>
+                                    Select All
+                                </label>
+                                <div class="bulk-buttons">
+                                    <button onclick="bulkDelete()" class="btn btn-danger" id="bulkDeleteBtn" style="display: none;">
+                                        Delete Selected
+                                    </button>
+                                    <button onclick="bulkActivate()" class="btn btn-success" id="bulkActivateBtn" style="display: none;">
+                                        Activate Selected
+                                    </button>
+                                    <button onclick="bulkDeactivate()" class="btn btn-secondary" id="bulkDeactivateBtn" style="display: none;">
+                                        Deactivate Selected
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="userList" class="user-list">
+                                <p class="loading">Loading users...</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Statistics Tab -->
+                    <section id="stats" class="tab-content">
+                        <div class="card">
+                            <h2>Statistics</h2>
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">Total Users:</span>
+                                    <span id="totalUsers" class="stat-value">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Active Users:</span>
+                                    <span id="activeUsers" class="stat-value">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Admin Users:</span>
+                                    <span id="adminUsers" class="stat-value">-</span>
+                                </div>
+                            </div>
+                            <button onclick="loadStatistics()" class="btn btn-secondary">Refresh Statistics</button>
+                        </div>
+                    </section>
+                </main>
+            </div>
+
+            <!-- Modal for Edit User -->
+            <div id="editModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Edit User</h2>
+                    <form id="editUserForm">
+                        <input type="hidden" id="editUserId">
+                        <div class="form-group">
+                            <label for="editEmail">Email *</label>
+                            <input type="email" id="editEmail" name="email" required
+                                   placeholder="Enter email address">
+                            <small class="form-help">Email must contain @ and .com</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="editFirstName">First Name *</label>
+                            <input type="text" id="editFirstName" name="firstName" required
+                                   placeholder="Enter first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editLastName">Last Name *</label>
+                            <input type="text" id="editLastName" name="lastName" required
+                                   placeholder="Enter last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPhoneNumber">Phone Number</label>
+                            <input type="tel" id="editPhoneNumber" name="phoneNumber" 
+                                   maxlength="10" placeholder="Enter 10-digit phone number">
+                            <small class="form-help">Phone number must be exactly 10 digits</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddress">Address</label>
+                            <textarea id="editAddress" name="address" rows="3" 
+                                      placeholder="Enter address"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editRole">Role</label>
+                            <select id="editRole" name="role">
+                                <option value="">Select Role</option>
+                                <option value="USER">User</option>
+                                <option value="ADMIN">Admin</option>
+                                <option value="MANAGER">Manager</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editActive">Active Status</label>
+                            <select id="editActive" name="active">
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

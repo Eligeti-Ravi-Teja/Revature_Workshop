@@ -1,0 +1,45 @@
+<!-- Create User Tab Component -->
+<section id="create" class="tab-content active">
+    <div class="card">
+        <h2>Create New User</h2>
+        <form id="createUserForm">
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required 
+                       placeholder="Enter email address">
+                <small class="form-help">Email must contain @ and .com</small>
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required
+                       placeholder="Enter first name">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required
+                       placeholder="Enter last name">
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" 
+                       maxlength="10" placeholder="Enter 10-digit phone number">
+                <small class="form-help">Phone number must be exactly 10 digits</small>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="3" 
+                          placeholder="Enter address"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role">
+                    <option value="">Select Role</option>
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="MANAGER">Manager</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Create User</button>
+        </form>
+    </div>
+</section> 
